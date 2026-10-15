@@ -28,12 +28,12 @@ Tired of paid billing apps and sketchy "free" invoice tools that lock your data?
 ### 📸 Screenshots
 
 <p align="center">
-  <img src="screenshots/editor.jpg" alt="Desi Invoice editor" width="700" />
+  <img src="screenshots/editor.svg" alt="Desi Invoice editor" width="700" />
   <br><sub>Fill in business, client & items — live preview updates instantly</sub>
 </p>
 
 <p align="center">
-  <img src="screenshots/invoice.jpg" alt="Generated GST invoice" width="700" />
+  <img src="screenshots/invoice.svg" alt="Generated GST invoice" width="700" />
   <br><sub>Print-ready invoice with GST breakup & amount in words</sub>
 </p>
 

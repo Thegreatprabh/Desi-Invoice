@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Desi Invoice — Free GST Invoice Generator for India</title>
+<meta name="description" content="Free, offline-first GST invoice generator for Indian freelancers and small businesses. CGST/SGST/IGST auto-calculation, PDF export." />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<header class="app-header no-print">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-mark">🧾</span>
+      <div>
+        <h1>Desi Invoice</h1>
+        <p class="tagline">Free GST invoices for Indian freelancers & small businesses</p>
+      </div>
+    </div>
+    <nav class="header-actions">
+      <button id="btn-new" class="btn btn-primary">+ New Invoice</button>
+      <button id="btn-list" class="btn btn-ghost">My Invoices <span id="inv-count" class="count-badge">0</span></button>
+      <button id="btn-print" class="btn btn-ghost">🖨️ Print / PDF</button>
+    </nav>
+  </div>
+</header>
+
+<main class="layout no-print">
+  <!-- ============ EDITOR ============ -->
+  <section id="view-editor" class="editor">
+    <div class="card">
+      <h2>Your Business</h2>
+      <div class="grid-2">
+        <label>Business name *<input id="biz-name" placeholder="e.g. Sharma Designs" /></label>
+        <label>Phone<input id="biz-phone" placeholder="+91 98765 43210" /></label>
+      </div>
+      <label>Address<textarea id="biz-address" rows="2" placeholder="Street, City, PIN"></textarea></label>
+      <div class="grid-3">
+        <label>State *<select id="biz-state"></select></label>
+        <label>GSTIN<input id="biz-gstin" placeholder="27ABCDE1234F1Z5" maxlength="15" class="upper" /><small class="hint" id="biz-gstin-hint"></small></label>
+        <label>Email<input id="biz-email" type="email" placeholder="you@business.in" /></label>
+      </div>
+      <div class="grid-2">
+        <label>UPI ID (for payments)<input id="biz-upi" placeholder="yourname@upi" /></label>
+        <label>Logo <input id="biz-logo" type="file" accept="image/*" /><small class="hint">Stays on your device only</small></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Bill To (Client)</h2>
+      <div class="grid-2">
+        <label>Client name *<input id="client-name" placeholder="Client / Company name" /></label>
+        <label>Client GSTIN<input id="client-gstin" placeholder="Optional" maxlength="15" class="upper" /><small class="hint" id="client-gstin-hint"></small></label>
+      </div>
+      <label>Client address<textarea id="client-address" rows="2" placeholder="Street, City, PIN"></textarea></label>
+      <div class="grid-2">
+        <label>Client state *<select id="client-state"></select></label>
+        <label>Place of supply<select id="supply-state"></select></label>
+      </div>
+      <p class="tax-note" id="tax-mode-note"></p>
+    </div>
+
+    <div class="card">
+      <h2>Invoice Details</h2>
+      <div class="grid-3">
+        <label>Invoice no.<input id="inv-number" readonly /></label>
+        <label>Invoice date<input id="inv-date" type="date" /></label>
+        <label>Due date<input id="inv-due" type="date" /></label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Items</h2>
+      <div class="table-wrap">
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>Description *</th><th>HSN/SAC</th><th>Qty</th><th>Rate (₹)</th>
+              <th>GST %</th><th>Disc %</th><th>Amount</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="items-body"></tbody>
+        </table>
+      </div>
+      <button id="btn-add-item" class="btn btn-ghost">+ Add item</button>
+    </div>
+
+    <div class="card">
+      <h2>Notes & Terms</h2>
+      <div class="grid-2">
+        <label>Notes<textarea id="inv-notes" rows="3" placeholder="Thank you for your business!"></textarea></label>
+        <label>Terms & conditions<textarea id="inv-terms" rows="3" placeholder="Payment due within 15 days."></textarea></label>
+      </div>
+      <div class="editor-actions">
+        <button id="btn-save" class="btn btn-primary">💾 Save Invoice</button>
+        <button id="btn-preview-scroll" class="btn btn-ghost">👁️ See live preview ↓</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INVOICE LIST ============ -->
+  <section id="view-list" class="hidden">
+    <div class="card">
+      <h2>Saved Invoices</h2>
+      <p class="muted">Stored only in this browser (localStorage). Nothing leaves your device.</p>
+      <div id="invoice-list" class="invoice-list"></div>
+    </div>
+  </section>
+
+  <!-- ============ LIVE PREVIEW ============ -->
+  <section id="preview-section" aria-label="Invoice preview">
+    <div class="preview-toolbar no-print">
+      <h2>Live Preview</h2>
+      <p class="muted">This is exactly what prints / saves as PDF.</p>
+    </div>
+    <div id="invoice-preview" class="invoice-sheet"></div>
+  </section>
+</main>
+
+<!-- Print-only invoice (clean A4) -->
+<div id="print-area" class="print-only"></div>
+
+<footer class="app-footer no-print">
+  <p>Desi Invoice is free & open source (MIT). Your data never leaves this browser. Built for Indian freelancers & small businesses. 🇮🇳</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
